@@ -5,7 +5,7 @@ const User=require("../models/userModel")
 const accessChat=asyncHandler(async(req,res)=>{
      const { userId } = req.body;
 
-  if (!userId) {  //dlmdl;mld
+  if (!userId) {  
     console.log("UserId param not sent with request");
     return res.sendStatus(400);
   }
