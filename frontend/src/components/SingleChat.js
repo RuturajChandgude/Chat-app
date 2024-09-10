@@ -33,7 +33,7 @@ const defaultOptions = {
     },
   };
 
-  const { user, selectedChat, setSelectedChat } = ChatState();
+  const { user, selectedChat, setSelectedChat, notification, setNotification} = ChatState();
   const toast=useToast();
 
 const fetchMessages=async()=>{
@@ -110,7 +110,11 @@ useEffect(()=>{
    socket.on('message received',(newMessageReceived)=>{
     if(!selectedChatCompare || selectedChatCompare._id !== newMessageReceived.chat._id)
     {
-      
+      //notification
+      if(!notification.includes(newMessageReceived)){
+        setNotification([newMessageReceived,...notification]);
+        setFetchAgain(!fetchAgain);
+      }
     }else{
       setMessages([...messages,newMessageReceived]);
     }
